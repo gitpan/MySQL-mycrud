@@ -5,7 +5,7 @@ use DBI;
 use Carp qw/croak/;
 
 use vars qw/$VERSION/;
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 
 sub new {
@@ -18,8 +18,11 @@ sub new {
     my $user = shift;
     my $passwd = shift;
 
-    my $dbh = DBI->connect("dbi:mysql:database=$db;host=$host;port=$port", $user, $passwd)
-                           or croak $DBI::errstr;
+    my $dbh = DBI->connect("dbi:mysql:database=$db;host=$host;port=$port", $user, $passwd,
+                           {
+                               PrintError => 0,
+                               RaiseError => 1,
+                           }) or croak $DBI::errstr;
 
     bless { 'dbh'=>$dbh }, $class;
 }
@@ -113,7 +116,7 @@ MySQL::mycrud - nothing but the mysql methods for myself
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
