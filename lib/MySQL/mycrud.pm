@@ -5,18 +5,18 @@ use DBI;
 use Carp qw/croak/;
 
 use vars qw/$VERSION/;
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 
 sub new {
 
     my $class = shift;
 
-    my $db = shift || 'test';
-    my $host = shift || '127.0.0.1';
-    my $port = shift || 3306;
-    my $user = shift || 'root';
-    my $passwd = shift || '';
+    my $db = shift;
+    my $host = shift;
+    my $port = shift;
+    my $user = shift;
+    my $passwd = shift;
 
     my $dbh = DBI->connect("dbi:mysql:database=$db;host=$host;port=$port", $user, $passwd)
                            or croak $DBI::errstr;
@@ -113,7 +113,7 @@ MySQL::mycrud - nothing but the mysql methods for myself
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
